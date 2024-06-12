@@ -23,6 +23,7 @@ public class Player implements UserDetails {
     private String password;
     private Integer points;
     private LocalDateTime lastOnline;
+    private String profilePictureUrl;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

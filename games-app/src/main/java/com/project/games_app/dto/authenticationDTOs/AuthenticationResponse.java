@@ -19,5 +19,6 @@ public class AuthenticationResponse {
     private String nickname;
     private Integer points;
     private LocalDateTime lastOnline;
+    private String profilePictureUrl;
     private String token;
 }

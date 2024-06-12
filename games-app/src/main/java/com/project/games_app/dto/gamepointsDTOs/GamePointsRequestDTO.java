@@ -1,18 +1,19 @@
-package com.project.games_app.dto.playerDTOs;
+package com.project.games_app.dto.gamepointsDTOs;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
-import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
 @SuperBuilder(toBuilder = true)
-public class PlayerResponseDTO extends PlayerRequestDTO{
+public class GamePointsRequestDTO {
 
-    private UUID id;
+    private UUID playerId;
+    private UUID gameId;
+    private Integer points;
 }
