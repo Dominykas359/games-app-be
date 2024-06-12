@@ -13,8 +13,8 @@ import java.util.UUID;
 public interface PlayerRepository {
 
     @Insert("INSERT INTO app.player "
-    + "(id, email, nickname, password, points, last_online) "
-    + "VALUES (#{id}, #{email}, #{nickname}, #{password}, #{points}, #{lastOnline})")
+    + "(id, email, nickname, password, points, last_online, profile_picture_url) "
+    + "VALUES (#{id}, #{email}, #{nickname}, #{password}, #{points}, #{lastOnline}, #{profilePictureUrl})")
     void insert(Player player);
 
     @Select("SELECT * FROM app.player WHERE email = #{email}")
@@ -24,7 +24,8 @@ public interface PlayerRepository {
             @Result(property = "nickname", column = "nickname"),
             @Result(property = "password", column = "password"),
             @Result(property = "points", column = "points"),
-            @Result(property = "lastOnline", column = "last_online")
+            @Result(property = "lastOnline", column = "last_online"),
+            @Result(property = "profilePictureUrl", column = "profile_picture_url")
     })
     Optional<Player> findByEmail(@Param("email") String email);
 
@@ -35,7 +36,8 @@ public interface PlayerRepository {
             @Result(property = "nickname", column = "nickname"),
             @Result(property = "password", column = "password"),
             @Result(property = "points", column = "points"),
-            @Result(property = "lastOnline", column = "last_online")
+            @Result(property = "lastOnline", column = "last_online"),
+            @Result(property = "profilePictureUrl", column = "profile_picture_url")
     })
     Optional<Player> findById(@Param("id") UUID id);
 
@@ -46,13 +48,15 @@ public interface PlayerRepository {
             @Result(property = "nickname", column = "nickname"),
             @Result(property = "password", column = "password"),
             @Result(property = "points", column = "points"),
-            @Result(property = "lastOnline", column = "last_online")
+            @Result(property = "lastOnline", column = "last_online"),
+            @Result(property = "profilePictureUrl", column = "profile_picture_url")
     })
     List<Player> findAll();
 
     @Update("UPDATE app.player SET " +
-            "id = #{id}, email = #{email}, nickname = #{nickname}, password = #{password}, " +
-            "points = #{points}, last_online = #{lastOnline} WHERE id = #{id}")
+            "email = #{email}, nickname = #{nickname}, password = #{password}, " +
+            "points = #{points}, last_online = #{lastOnline}, profile_picture_url = #{profilePictureUrl}" +
+            " WHERE id = #{id}")
     void update(Player player);
 
     @Delete("DELETE FROM app.player WHERE id = #{id}")

@@ -14,10 +14,11 @@ import java.util.UUID;
 @SuperBuilder(toBuilder = true)
 public class PlayerRequestDTO {
 
-    private UUID id;
     private String email;
     private String nickname;
     private String password;
     private Integer points;
     private LocalDateTime lastOnline;
+    private String profilePictureUrl;
+
 }

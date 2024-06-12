@@ -39,6 +39,7 @@ public class PlayerService {
                 .toList();
     }
 
+    @Transactional
     public PlayerResponseDTO update(UUID id, PlayerRequestDTO playerRequestDTO){
         Player player = playerRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Player not found with ID: " + id));
@@ -47,12 +48,14 @@ public class PlayerService {
         player.setNickname(playerRequestDTO.getNickname());
         player.setPoints(playerRequestDTO.getPoints());
         player.setLastOnline(playerRequestDTO.getLastOnline());
+        player.setProfilePictureUrl(playerRequestDTO.getProfilePictureUrl());
 
         playerRepository.update(player);
 
         return PlayerMapper.toDto(player);
     }
 
+    @Transactional
     public void delete(UUID id){
         playerRepository.findById(id)
             .orElseThrow(() -> new RuntimeException("Player not found with ID: " + id));

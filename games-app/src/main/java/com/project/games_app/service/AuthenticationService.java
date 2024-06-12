@@ -34,6 +34,7 @@ public class AuthenticationService {
                 .password(passwordEncoder.encode(request.getPassword()))
                 .points(100)
                 .lastOnline(null)
+                .profilePictureUrl(null)
                 .build();
         playerRepository.insert(player);
         var jwtToken = jwtService.generateToken(player);
@@ -43,6 +44,7 @@ public class AuthenticationService {
                 .nickname(player.getNickname())
                 .points(player.getPoints())
                 .lastOnline(player.getLastOnline())
+                .profilePictureUrl(player.getProfilePictureUrl())
                 .token(jwtToken)
                 .build();
     }
@@ -63,6 +65,7 @@ public class AuthenticationService {
                 .nickname(player.getNickname())
                 .points(player.getPoints())
                 .lastOnline(player.getLastOnline())
+                .profilePictureUrl(player.getProfilePictureUrl())
                 .token(jwtToken)
                 .build();
     }
