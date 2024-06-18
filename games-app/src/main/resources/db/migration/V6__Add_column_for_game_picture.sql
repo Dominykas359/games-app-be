@@ -1,0 +1,1 @@
+ALTER TABLE games ADD COLUMN picture_url VARCHAR(255);

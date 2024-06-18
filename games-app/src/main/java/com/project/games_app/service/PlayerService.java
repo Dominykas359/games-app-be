@@ -32,6 +32,17 @@ public class PlayerService {
         return PlayerMapper.toDto(player);
     }
 
+    public PlayerResponseDTO getPlayerByEmail(String email){
+
+        return PlayerMapper.toDto(playerRepository.findByEmail(email)
+                .orElseThrow(() -> new RuntimeException("Not found")));
+    }
+
+    public PlayerResponseDTO getPlayerByNickname(String nickname){
+        return PlayerMapper.toDto(playerRepository.findByNickname(nickname)
+                .orElseThrow(() -> new RuntimeException("Not found")));
+    }
+
     public List<PlayerResponseDTO> getPlayers(){
         return playerRepository.findAll()
                 .stream()

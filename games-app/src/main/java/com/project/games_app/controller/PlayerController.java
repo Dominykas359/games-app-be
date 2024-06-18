@@ -24,6 +24,12 @@ public class PlayerController {
         return ResponseEntity.ok(playerService.getPlayer(id));
     }
 
+    @GetMapping("/username/{nickname}")
+    public ResponseEntity<PlayerResponseDTO> getPlayerByNickname(
+            @PathVariable(value = "nickname") String nickname) {
+        return ResponseEntity.ok(playerService.getPlayerByNickname(nickname));
+    }
+
     @GetMapping
     public List<PlayerResponseDTO> getPlayers(){
         return playerService.getPlayers();

@@ -41,6 +41,18 @@ public interface PlayerRepository {
     })
     Optional<Player> findById(@Param("id") UUID id);
 
+    @Select("SELECT * FROM app.player WHERE nickname = #{nickname}")
+    @Results({
+            @Result(property = "id", column = "id"),
+            @Result(property = "email", column = "email"),
+            @Result(property = "nickname", column = "nickname"),
+            @Result(property = "password", column = "password"),
+            @Result(property = "points", column = "points"),
+            @Result(property = "lastOnline", column = "last_online"),
+            @Result(property = "profilePictureUrl", column = "profile_picture_url")
+    })
+    Optional<Player> findByNickname(@Param("nickname") String nickname);
+
     @Select("SELECT * FROM app.player")
     @Results({
             @Result(property = "id", column = "id"),

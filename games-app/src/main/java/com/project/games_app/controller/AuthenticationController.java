@@ -4,12 +4,10 @@ import com.project.games_app.dto.authenticationDTOs.AuthenticationRequest;
 import com.project.games_app.dto.authenticationDTOs.AuthenticationResponse;
 import com.project.games_app.dto.authenticationDTOs.RegisterRequest;
 import com.project.games_app.service.AuthenticationService;
+import com.project.games_app.service.PlayerService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/auth")
@@ -17,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class AuthenticationController {
 
     private final AuthenticationService service;
+    private final PlayerService playerService;
 
     @PostMapping("/register")
     public ResponseEntity<AuthenticationResponse> register(

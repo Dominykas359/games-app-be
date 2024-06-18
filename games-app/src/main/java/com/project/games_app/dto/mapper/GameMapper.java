@@ -13,6 +13,7 @@ public class GameMapper {
         return GameResponseDTO.builder()
                 .id(game.getId())
                 .title(game.getTitle())
+                .pictureUrl(game.getPictureUrl())
                 .build();
     }
 
@@ -21,6 +22,7 @@ public class GameMapper {
         Game game = Game.builder()
                 .id(UUID.randomUUID())
                 .title(gameRequestDTO.getTitle())
+                .pictureUrl(gameRequestDTO.getPictureUrl())
                 .build();
 
         return game;
