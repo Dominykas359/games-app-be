@@ -12,4 +12,5 @@ import lombok.experimental.SuperBuilder;
 public class GameRequestDTO {
 
     private String title;
+    private String pictureUrl;
 }

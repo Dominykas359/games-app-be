@@ -1,19 +1,16 @@
 package com.project.games_app.service;
 
-import com.fasterxml.classmate.AnnotationOverrides;
 import com.project.games_app.dto.authenticationDTOs.AuthenticationRequest;
 import com.project.games_app.dto.authenticationDTOs.AuthenticationResponse;
 import com.project.games_app.dto.authenticationDTOs.RegisterRequest;
+import com.project.games_app.models.Player;
 import com.project.games_app.repository.PlayerRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import com.project.games_app.models.Player;
 
-import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Service
@@ -27,7 +24,7 @@ public class AuthenticationService {
 
     public AuthenticationResponse register(RegisterRequest request) {
 
-        var player = Player.builder()
+        Player player = Player.builder()
                 .id(UUID.randomUUID())
                 .email(request.getEmail())
                 .nickname(request.getNickname())
