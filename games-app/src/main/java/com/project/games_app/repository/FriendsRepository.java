@@ -26,6 +26,15 @@ public interface FriendsRepository {
     })
     List<Friend> findByPlayerId(@Param("playerId") UUID playerId);
 
+    @Select("SELECT * FROM app.friends WHERE friend_id = #{friendId}")
+    @Results({
+            @Result(property = "id", column = "id"),
+            @Result(property = "playerId", column = "player_id"),
+            @Result(property = "friendId", column = "friend_id"),
+            @Result(property = "friendsSince", column = "friends_since")
+    })
+    List<Friend> findByFriendId(@Param("friendId") UUID friendId);
+
     @Select("SELECT * FROM app.friends WHERE id = #{id}")
     @Results({
             @Result(property = "id", column = "id"),

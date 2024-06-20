@@ -34,6 +34,14 @@ public class FriendService {
                 .toList();
     }
 
+    public List<FriendResponseDTO> findByFriend(UUID friendId){
+
+        return friendsRepository.findByFriendId(friendId)
+                .stream()
+                .map(FriendMapper::toDto)
+                .toList();
+    }
+
     public FriendResponseDTO findFriend(UUID id){
 
         return FriendMapper.toDto(friendsRepository.findById(id)

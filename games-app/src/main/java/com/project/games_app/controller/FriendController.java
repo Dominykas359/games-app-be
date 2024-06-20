@@ -40,6 +40,13 @@ public class FriendController {
         return friendService.findByPlayer(id);
     }
 
+    @GetMapping("/list/friend/{id}")
+    public List<FriendResponseDTO> findFriendByFriend(
+            @PathVariable("id") UUID id
+    ){
+        return friendService.findByFriend(id);
+    }
+
     @DeleteMapping("/{id}")
     public void delete(@PathVariable("id") UUID id){
         friendService.delete(id);
