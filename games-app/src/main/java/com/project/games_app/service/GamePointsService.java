@@ -51,9 +51,31 @@ public class GamePointsService {
                 .orElseThrow(() -> new RuntimeException("Not found")));
     }
 
+    public GamePointsResponseDTO findByGameAndPlayer(UUID id, UUID playerId){
+
+        return  GamePointsMapper.toDto(gamePointsRepository.findByPlayerAndGame(id, playerId)
+                .orElseThrow(() -> new RuntimeException("Not found")));
+    }
+
     public List<GamePointsResponseDTO> findByPlayer(UUID playerId){
 
         return gamePointsRepository.findByPlayerId(playerId)
+                .stream()
+                .map(GamePointsMapper::toDto)
+                .toList();
+    }
+
+    public List<GamePointsResponseDTO> findByGamePlayer(UUID playerId, UUID gameId){
+
+        return gamePointsRepository.findByGameIdPlayer(playerId, gameId)
+                .stream()
+                .map(GamePointsMapper::toDto)
+                .toList();
+    }
+
+    public List<GamePointsResponseDTO> findByGamePlayer2(UUID playerId, UUID gameId){
+
+        return gamePointsRepository.findByGameIdPlayer2(playerId, gameId)
                 .stream()
                 .map(GamePointsMapper::toDto)
                 .toList();

@@ -65,6 +65,52 @@ public interface PlayerRepository {
     })
     List<Player> findAll();
 
+    @Select("SELECT * FROM app.player ORDER BY points DESC LIMIT 15")
+    @Results({
+            @Result(property = "id", column = "id"),
+            @Result(property = "email", column = "email"),
+            @Result(property = "nickname", column = "nickname"),
+            @Result(property = "password", column = "password"),
+            @Result(property = "points", column = "points"),
+            @Result(property = "lastOnline", column = "last_online"),
+            @Result(property = "profilePictureUrl", column = "profile_picture_url")
+    })
+    List<Player> findAllForLeaderboard();
+
+    @Select("SELECT P.* FROM app.player P " +
+            "INNER JOIN app.friends F " +
+            "ON P.id = F.player_id " +
+            "WHERE F.friend_id = #{id} " +
+            "ORDER BY P.points DESC " +
+            "LIMIT 15")
+    @Results({
+            @Result(property = "id", column = "id"),
+            @Result(property = "email", column = "email"),
+            @Result(property = "nickname", column = "nickname"),
+            @Result(property = "password", column = "password"),
+            @Result(property = "points", column = "points"),
+            @Result(property = "lastOnline", column = "last_online"),
+            @Result(property = "profilePictureUrl", column = "profile_picture_url")
+    })
+    List<Player> findAllForLeaderboardFriends(@Param("id") UUID id);
+
+    @Select("SELECT P.* FROM app.player P " +
+            "INNER JOIN app.friends F " +
+            "ON P.id = F.friend_id " +
+            "WHERE F.player_id = #{id} " +
+            "ORDER BY P.points DESC " +
+            "LIMIT 15")
+    @Results({
+            @Result(property = "id", column = "id"),
+            @Result(property = "email", column = "email"),
+            @Result(property = "nickname", column = "nickname"),
+            @Result(property = "password", column = "password"),
+            @Result(property = "points", column = "points"),
+            @Result(property = "lastOnline", column = "last_online"),
+            @Result(property = "profilePictureUrl", column = "profile_picture_url")
+    })
+    List<Player> findAllForLeaderboardFriendsByPlayer(@Param("id") UUID id);
+
     @Update("UPDATE app.player SET " +
             "email = #{email}, nickname = #{nickname}, password = #{password}, " +
             "points = #{points}, last_online = #{lastOnline}, profile_picture_url = #{profilePictureUrl}" +

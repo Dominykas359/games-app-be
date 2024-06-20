@@ -50,6 +50,27 @@ public class PlayerService {
                 .toList();
     }
 
+    public List<PlayerResponseDTO> getPlayersForLeaderboard(){
+        return playerRepository.findAllForLeaderboard()
+                .stream()
+                .map(PlayerMapper::toDto)
+                .toList();
+    }
+
+    public List<PlayerResponseDTO> getPlayersForLeaderboardFriends(UUID id){
+        return playerRepository.findAllForLeaderboardFriends(id)
+                .stream()
+                .map(PlayerMapper::toDto)
+                .toList();
+    }
+
+    public List<PlayerResponseDTO> getPlayersForLeaderboardFriendsByPlayer(UUID id){
+        return playerRepository.findAllForLeaderboardFriendsByPlayer(id)
+                .stream()
+                .map(PlayerMapper::toDto)
+                .toList();
+    }
+
     @Transactional
     public PlayerResponseDTO update(UUID id, PlayerRequestDTO playerRequestDTO){
         Player player = playerRepository.findById(id)
