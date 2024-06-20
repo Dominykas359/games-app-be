@@ -35,6 +35,21 @@ public class PlayerController {
         return playerService.getPlayers();
     }
 
+    @GetMapping("/leaderboard")
+    public List<PlayerResponseDTO> getPlayersForLeaderboard(){
+        return playerService.getPlayersForLeaderboard();
+    }
+
+    @GetMapping("/leaderboard/friends/{id}")
+    public List<PlayerResponseDTO> getPlayersForLeaderboardFriends(@PathVariable(value = "id") UUID id){
+        return playerService.getPlayersForLeaderboardFriends(id);
+    }
+
+    @GetMapping("/leaderboard/friends/by-player/{id}")
+    public List<PlayerResponseDTO> getPlayersForLeaderboardFriendsByPlayer(@PathVariable(value = "id") UUID id){
+        return playerService.getPlayersForLeaderboardFriendsByPlayer(id);
+    }
+
     @PutMapping("/{id}")
     public PlayerResponseDTO updatePlayer(@PathVariable(value = "id") UUID id, @RequestBody PlayerRequestDTO playerRequestDTO){
         return playerService.update(id, playerRequestDTO);

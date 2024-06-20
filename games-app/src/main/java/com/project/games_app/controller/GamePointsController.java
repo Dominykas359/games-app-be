@@ -49,6 +49,30 @@ public class GamePointsController {
         return gamePointsService.findByPlayer(playerId);
     }
 
+    @GetMapping("player/{playerId}/game/{id}")
+    public ResponseEntity<GamePointsResponseDTO> findByPlayerAndGame(
+            @PathVariable("id") UUID id,
+            @PathVariable("playerId") UUID playerId
+    ){
+        return ResponseEntity.ok(gamePointsService.findByGameAndPlayer(id, playerId));
+    }
+
+    @GetMapping("/leaderboard/{id}/player/{player-id}")
+    public List<GamePointsResponseDTO> findByGamePlayer(
+            @PathVariable("id") UUID gameId,
+            @PathVariable("player-id") UUID playerId
+    ){
+        return  gamePointsService.findByGamePlayer(playerId, gameId);
+    }
+
+    @GetMapping("/leaderboard2/{id}/player/{player-id}")
+    public List<GamePointsResponseDTO> findByGamePlayer2(
+            @PathVariable("id") UUID gameId,
+            @PathVariable("player-id") UUID playerId
+    ){
+        return  gamePointsService.findByGamePlayer2(playerId, gameId);
+    }
+
     @GetMapping("/game/{id}")
     public List<GamePointsResponseDTO> findByGame(@PathVariable("id") UUID gameId){
 
