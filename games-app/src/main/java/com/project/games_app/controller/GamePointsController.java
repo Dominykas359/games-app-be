@@ -43,6 +43,15 @@ public class GamePointsController {
         return ResponseEntity.ok(gamePointsService.find(id));
     }
 
+    @GetMapping("/one/{id}/player/{player-id}")
+    public ResponseEntity<GamePointsResponseDTO> findOne(
+            @PathVariable("id") UUID id,
+            @PathVariable("player-id") UUID playerId
+    ){
+
+        return ResponseEntity.ok(gamePointsService.findOneByGameId(id, playerId));
+    }
+
     @GetMapping("/player/{id}")
     public List<GamePointsResponseDTO> findByPlayer(@PathVariable("id") UUID playerId){
 
