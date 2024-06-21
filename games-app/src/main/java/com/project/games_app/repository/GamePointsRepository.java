@@ -33,6 +33,15 @@ public interface GamePointsRepository {
     })
     Optional<GamePoints> findById(@Param("id") UUID id);
 
+    @Select("SELECT * FROM app.game_points WHERE game_id = #{gameId} AND player_id = #{playerId}")
+    @Results({
+            @Result(property = "id", column = "id"),
+            @Result(property = "playerId", column = "player_id"),
+            @Result(property = "gameId", column = "game_id"),
+            @Result(property = "points", column = "points")
+    })
+    Optional<GamePoints> findOneByGameId(@Param("gameId") UUID id, @Param("playerId") UUID playerId);
+
     @Select("SELECT GP.* FROM app.game_points GP " +
             "INNER JOIN app.friends F " +
             "ON GP.player_id = F.player_id " +

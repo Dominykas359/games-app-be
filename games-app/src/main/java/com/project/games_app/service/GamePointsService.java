@@ -57,6 +57,12 @@ public class GamePointsService {
                 .orElseThrow(() -> new RuntimeException("Not found")));
     }
 
+    public GamePointsResponseDTO findOneByGameId(UUID id, UUID playerId){
+
+        return GamePointsMapper.toDto(gamePointsRepository.findOneByGameId(id, playerId)
+                .orElseThrow(() -> new RuntimeException("Not found")));
+    }
+
     public List<GamePointsResponseDTO> findByPlayer(UUID playerId){
 
         return gamePointsRepository.findByPlayerId(playerId)
