@@ -117,6 +117,10 @@ public interface PlayerRepository {
             " WHERE id = #{id}")
     void update(Player player);
 
+    @Update("UPDATE app.player SET " +
+            "password = #{password} WHERE id = #{id}")
+    void updatePassword(@Param("id") UUID id, @Param("password") String password);
+
     @Delete("DELETE FROM app.player WHERE id = #{id}")
     void delete(@Param("id") UUID id);
 }
