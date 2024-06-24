@@ -1,5 +1,6 @@
 package com.project.games_app.controller;
 
+import com.project.games_app.dto.authenticationDTOs.PasswordRequest;
 import com.project.games_app.dto.playerDTOs.PlayerRequestDTO;
 import com.project.games_app.dto.playerDTOs.PlayerResponseDTO;
 import com.project.games_app.service.PlayerService;
@@ -53,6 +54,14 @@ public class PlayerController {
     @PutMapping("/{id}")
     public PlayerResponseDTO updatePlayer(@PathVariable(value = "id") UUID id, @RequestBody PlayerRequestDTO playerRequestDTO){
         return playerService.update(id, playerRequestDTO);
+    }
+
+    @PutMapping("/change-password/{id}")
+    public PlayerResponseDTO updatePassword(
+            @PathVariable(value = "id") UUID id,
+            @RequestBody PasswordRequest passwordRequest
+            ){
+        return playerService.updatePassword(id, passwordRequest);
     }
 
     @DeleteMapping("/{id}")

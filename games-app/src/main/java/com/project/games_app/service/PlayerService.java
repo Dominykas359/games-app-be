@@ -1,11 +1,14 @@
 package com.project.games_app.service;
 
+import com.project.games_app.dto.authenticationDTOs.PasswordRequest;
 import com.project.games_app.dto.playerDTOs.PlayerRequestDTO;
 import com.project.games_app.dto.playerDTOs.PlayerResponseDTO;
 import com.project.games_app.dto.mapper.PlayerMapper;
 import com.project.games_app.models.Player;
 import com.project.games_app.repository.PlayerRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -17,6 +20,7 @@ import java.util.UUID;
 public class PlayerService {
 
     private final PlayerRepository playerRepository;
+    private final PasswordEncoder passwordEncoder;
 
     @Transactional
     public PlayerResponseDTO createPlayer(PlayerRequestDTO playerRequestDTO) {
@@ -83,6 +87,17 @@ public class PlayerService {
         player.setProfilePictureUrl(playerRequestDTO.getProfilePictureUrl());
 
         playerRepository.update(player);
+
+        return PlayerMapper.toDto(player);
+    }
+
+    @Transactional
+    public PlayerResponseDTO updatePassword(UUID id, PasswordRequest passwordRequest){
+        Player player = playerRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Not found"));
+
+        String encryptedPassword = passwordEncoder.encode(passwordRequest.getNewPassword());
+        playerRepository.updatePassword(id, encryptedPassword);
 
         return PlayerMapper.toDto(player);
     }
